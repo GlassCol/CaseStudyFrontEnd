@@ -1,0 +1,11 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+.parent{
+    position: absolute;
+    top: 0px;
+    right:0px;
+    bottom:0px;
+    left:0px;
+}
+.pointer-item li:hover{
+    cursor: pointer
+}
