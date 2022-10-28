@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import RestaurantService from '../services/RestaurantService';
 import Restaurant from './Restaurant';
+import '../css/Home.css';
 
 const RestaurantDisplay = () => {
 
@@ -33,7 +34,7 @@ const [loading, setLoading] = useState(true);
     };
 
   return (
-    <table className='table'>
+    <table className='table' style={{width: 800}}>
         <thead>
             <tr>
                 <th scope='col'>Id</th>

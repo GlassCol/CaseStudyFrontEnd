@@ -33,7 +33,7 @@ public class ItemController {
     public List<Item> getItems(){
         return this.itemService.getAllItems();
     }
-    @GetMapping("/items/{restId}")
+    @GetMapping("/items/restItems/{restId}")
     public List<Item> getRestItems(@PathVariable Long restId){
         return this.itemService.getAllRestItems(restId);
     }

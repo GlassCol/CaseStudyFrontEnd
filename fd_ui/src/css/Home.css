@@ -9,3 +9,6 @@
 .pointer-item li:hover{
     cursor: pointer
 }
+.table {
+    width: 25px;
+}

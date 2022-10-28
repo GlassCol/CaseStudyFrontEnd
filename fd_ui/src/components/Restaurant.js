@@ -1,12 +1,10 @@
 import React from 'react'
-import Button from 'react-bootstrap/esm/Button';
  import '../css/Home.css';
-
  const editRestaurant = (e, id) => {
   e.preventDefault();
  };
 
-const Restaurant = ({ restaurant, deleteRestaurant }) => {
+const Restaurant = ({ restaurant, deleteRestaurant}) => {
   return (
     <tr key={restaurant.id}>
                 <td>{restaurant.id}</td>
@@ -15,7 +13,7 @@ const Restaurant = ({ restaurant, deleteRestaurant }) => {
                 <td className='text-right'><button className='px-2 dropdown-item' onClick={(e, id) => editRestaurant(e, id)}>Edit</button></td>
                 <td><button className='px-2 dropdown-item'>Display</button></td>
                 <td><button onClick={(e, id) => deleteRestaurant(e, restaurant.id)} className='px-2 dropdown-item'>Delete</button></td>
-            </tr>
+    </tr>
   )
 }
 
