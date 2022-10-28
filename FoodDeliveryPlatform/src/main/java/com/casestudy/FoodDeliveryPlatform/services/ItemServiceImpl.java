@@ -56,4 +56,16 @@ public class ItemServiceImpl implements ItemService{
         itemRepository.delete(item);
         return true;
     }
+
+    @Override
+    public List<Item> getAllRestItems(Long restId) {
+        List<ItemEntity> itemEntities = itemRepository.findAll();
+        List<Item> items = itemEntities.stream()
+                .map(item -> new Item(item.getId(), item.getRestId(), item.getName(), item.getPrice()))
+                .collect(Collectors.toList());
+        for (Item item : items) {
+            if(item.getRestId() != restId)items.remove(item);
+        }
+        return items;
+    }
 }

@@ -14,4 +14,6 @@ public interface ItemService {
     Item updateItem(Long id, Item Item);
 
     boolean deleteItemById(Long id);
+
+    List<Item> getAllRestItems(Long restId);
 }
