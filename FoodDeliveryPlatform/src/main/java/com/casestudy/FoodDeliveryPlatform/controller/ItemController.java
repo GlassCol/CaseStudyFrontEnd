@@ -38,8 +38,8 @@ public class ItemController {
         return this.itemService.getAllRestItems(restId);
     }
     @PutMapping("/items/{itemId}")
-    public ResponseEntity<Item> updateItem(@PathVariable Long id, @RequestBody Item item){
-        item = itemService.updateItem(id, item);
+    public ResponseEntity<Item> updateItem(@PathVariable Long itemId, @RequestBody Item item){
+        item = itemService.updateItem(itemId, item);
         return ResponseEntity.ok(item);
     }
     @DeleteMapping("/items/{itemId}")

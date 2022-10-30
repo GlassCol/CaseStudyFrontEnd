@@ -1,30 +1,32 @@
 import React from 'react'
 
-const EditItemRow = ({ editformData, HandleEditFormChange }) => {
+const EditItemRow = ({ editFormData, handleEditFormChange, handleEditFormSubmit}) => {
     return (
         <tr>
             <td></td>
             <td>
-                <input type={"text"}
+                <input
+                    type="text"
                     required="required"
                     placeholder='Enter a name...'
-                    name='itemname'>
-                    value={editformData.name}
-                    onChange={HandleEditFormChange}
-                </input>
+                    name='name'
+                    value={editFormData.name}
+                    onChange={handleEditFormChange}
+                ></input>
             </td>
             <td></td>
             <td>
-                <input type={"text"}
+                <input
+                    type="text"
                     required="required"
                     placeholder='Enter a price...'
-                    name='itemprice'>
-                    value={editformData.price}
-                    onChange={HandleEditFormChange}
-                </input>
+                    name='price'
+                    value={editFormData.price}
+                    onChange={handleEditFormChange}
+                ></input>
             </td>
             <td>
-                <button type='submit'>Save</button>
+                <button type='submit' onClick={handleEditFormSubmit}>Save</button>
             </td>
         </tr>
     )

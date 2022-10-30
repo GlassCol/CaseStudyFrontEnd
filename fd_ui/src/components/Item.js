@@ -11,7 +11,7 @@ const Item = ({ item, deleteItem, handleEditClick}) => {
                 <td>{item.price}</td>
                 <td></td>
                 <td className='text-right'><button className='px-2 dropdown-item' onClick={(e) => handleEditClick(e, item)}>Edit</button></td>
-                <td><button onClick={(e, id) => deleteItem(e, item.id)} className='px-2 dropdown-item'>Delete</button></td>
+                <td><button onClick={(e) => deleteItem(e, item.id)} className='px-2 dropdown-item'>Delete</button></td>
     </tr>
   )
 }

@@ -21,7 +21,7 @@ deleteItem(id) {
 getItemById(id){
     return axios.get(ITEM_API_BASE_URL + "/" + id);
 }
-updateItem(item, id){
+updateItem(id, item){
     return axios.put(ITEM_API_BASE_URL + "/" + id, item);
 }
 

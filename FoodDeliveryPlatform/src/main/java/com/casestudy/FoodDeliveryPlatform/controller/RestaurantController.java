@@ -1,6 +1,5 @@
 package com.casestudy.FoodDeliveryPlatform.controller;
 
-import com.casestudy.FoodDeliveryPlatform.entity.RestaurantEntity;
 import com.casestudy.FoodDeliveryPlatform.model.Restaurant;
 import com.casestudy.FoodDeliveryPlatform.services.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;

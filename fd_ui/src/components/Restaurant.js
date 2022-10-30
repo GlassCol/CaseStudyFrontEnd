@@ -1,18 +1,15 @@
 import React from 'react'
- import '../css/Home.css';
- const editRestaurant = (e, id) => {
-  e.preventDefault();
- };
+import '../css/Home.css';
 
-const Restaurant = ({ restaurant, deleteRestaurant}) => {
+
+const Restaurant = ({ restaurant, deleteRestaurant, handleEditClick }) => {
   return (
     <tr key={restaurant.id}>
-                <td>{restaurant.id}</td>
-                <td>{restaurant.name}</td>
-                <td>{restaurant.emailId}</td>
-                <td className='text-right'><button className='px-2 dropdown-item' onClick={(e, id) => editRestaurant(e, id)}>Edit</button></td>
-                <td><button className='px-2 dropdown-item'>Display</button></td>
-                <td><button onClick={(e, id) => deleteRestaurant(e, restaurant.id)} className='px-2 dropdown-item'>Delete</button></td>
+      <td>{restaurant.id}</td>
+      <td>{restaurant.name}</td>
+      <td>{restaurant.emailId}</td>
+      <td className='text-right'><button className='px-2 dropdown-item' onClick={(e) => handleEditClick(e, restaurant)}>Edit</button></td>
+      <td><button onClick={(e, id) => deleteRestaurant(e, restaurant.id)} className='px-2 dropdown-item'>Delete</button></td>
     </tr>
   )
 }
