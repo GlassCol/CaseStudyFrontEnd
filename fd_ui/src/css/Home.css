@@ -1,10 +1,18 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 .parent{
+    justify-content: center;
+    align-items: center;
     position: absolute;
     top: 0px;
     right:0px;
     bottom:0px;
     left:0px;
+}
+.centered-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 .pointer-item li:hover{
     cursor: pointer
