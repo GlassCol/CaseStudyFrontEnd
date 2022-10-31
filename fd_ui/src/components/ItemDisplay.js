@@ -106,6 +106,12 @@ const ItemDisplay = () => {
         });
     };
 
+    const handleEditFormCancel = (e) => {
+        e.preventDefault()
+        setEditItemId(null);
+    }
+
+
     return (
         <>
             <form>
@@ -132,6 +138,7 @@ const ItemDisplay = () => {
                                             item={item}
                                             handleEditClick={handleEditClick}
                                             deleteItem={deleteItem}
+                                            handleEditFormCancel={handleEditFormCancel}
                                             key={item.id}
                                         />
                                     )}

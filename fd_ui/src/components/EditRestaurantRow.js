@@ -1,6 +1,6 @@
 import React from 'react'
 
-const EditRestaurantRow = ({ editFormData, handleEditFormChange, handleEditFormSubmit}) => {
+const EditRestaurantRow = ({ editFormData, handleEditFormChange, handleEditFormSubmit, handleEditFormCancel}) => {
     return (
         <tr>
             <td></td>
@@ -26,6 +26,7 @@ const EditRestaurantRow = ({ editFormData, handleEditFormChange, handleEditFormS
             </td>
             <td>
                 <button type='submit' onClick={handleEditFormSubmit}>Save</button>
+                <button type='submit' onClick={handleEditFormCancel}>Cancel</button>
             </td>
         </tr>
     )

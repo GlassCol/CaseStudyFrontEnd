@@ -86,6 +86,11 @@ const RestaurantDisplay = () => {
         fetchData()
     }
 
+    const handleEditFormCancel = (e) => {
+        e.preventDefault()
+        setEditRestaurantId(null);
+    }
+
     const handleEditClick = (e, restaurant) => {
         e.preventDefault();
         setEditRestaurantId(restaurant.id);
@@ -137,6 +142,7 @@ const RestaurantDisplay = () => {
 
     return (
         <>
+            <h1>Restaurants</h1>
             <form>
                 <table className='table' style={{ width: 800 }}>
                     <thead>
@@ -157,6 +163,7 @@ const RestaurantDisplay = () => {
                                             editFormData={editFormData}
                                             handleEditFormSubmit={handleEditFormSubmit}
                                             handleEditFormChange={handleEditFormChange}
+                                            handleEditFormCancel={handleEditFormCancel}
                                             key={restaurant.id}
                                         />
                                     ) : (
@@ -200,6 +207,7 @@ const RestaurantDisplay = () => {
                 />
                 <button type='submit' onClick={saveRestaurant}>Save</button>
             </form>
+            <h2>Food Items</h2>
             <div><ItemDisplay /></div>
         </>
     )
