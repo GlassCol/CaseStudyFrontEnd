@@ -41,6 +41,7 @@ const Login = () => {
   }
 
   return (
+    <div className='centered-div'>
     <Container className="d-grid h-100">
       <Form className="text-center w-25">
         <h1 className="mb-3 fs-3 fw-normal">Login</h1>
@@ -62,6 +63,7 @@ const Login = () => {
         <Button type='submit' onClick={doLogin}>Submit</Button>
       </Form>
     </Container>
+    </div>
   )
 }
 
