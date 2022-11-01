@@ -5,7 +5,7 @@ import RestaurantDisplay from './components/RestaurantDisplay';
 
 function Home() {
   return (
-    <div className='parent'>
+    <div>
       <div><Header /></div>
       <div><RestaurantDisplay /></div>
     </ div>

@@ -2,6 +2,8 @@ import React, { Fragment, useEffect, useState } from 'react'
 import ItemService from '../services/ItemService';
 import EditItemRow from './EditItemRow';
 import Item from './Item';
+import Container from 'react-bootstrap/Container';
+
 const ItemDisplay = () => {
 
     const [items, setItems] = useState(null);
@@ -113,7 +115,7 @@ const ItemDisplay = () => {
 
 
     return (
-        <>
+        <Container className='align-items-center align-content-center p-5 w-75'>
             <form>
                 <table className='table' style={{ width: 800 }}>
                     <thead key={"thead"}>
@@ -175,7 +177,7 @@ const ItemDisplay = () => {
                 />
                 <button type='submit' onClick={saveItem}>Save</button>
             </form>
-        </>
+        </Container>
     )
 }
 

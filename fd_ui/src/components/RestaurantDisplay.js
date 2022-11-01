@@ -2,12 +2,13 @@ import React, { Fragment, useEffect, useState } from 'react'
 import RestaurantService from '../services/RestaurantService';
 import Restaurant from './Restaurant';
 import '../css/Home.css';
-import ItemDisplay from './ItemDisplay';
+import Container from 'react-bootstrap/Container';
 import EditRestaurantRow from './EditRestaurantRow';
 import {omit} from 'lodash';
+import { useNavigate, } from 'react-router-dom';
 
 const RestaurantDisplay = () => {
-
+    const navigate = useNavigate();
     const [restaurants, setRestaurants] = useState(null);
     const [loading, setLoading] = useState(true);
     const [editRestaurantId, setEditRestaurantId] = useState(null);
@@ -21,8 +22,15 @@ const RestaurantDisplay = () => {
     const handleChange = (e) => {
         const value = e.target.value;
         setRestaurant({ ...restaurant, [e.target.name]: value });
+
     };
 
+    const handleDisplayClick = (e, displayRestaurant) => {
+        e.preventDefault();
+        console.log(displayRestaurant)
+        navigate('/RestaurantPage/' + displayRestaurant.id);
+        
+    }
     const saveRestaurant = (e) => {
         e.preventDefault();
         validate(e, restaurant.name, restaurant.emailId, restaurant.license);
@@ -141,15 +149,19 @@ const RestaurantDisplay = () => {
     }
 
     return (
-        <>
+        <div>
+            <Container className='align-items-center align-content-center p-5 w-75'>
+            <Container className='align-items-center align-content-center p-5 w-50'>
             <h1>Restaurants</h1>
+            </Container>
             <form>
-                <table className='table' style={{ width: 800 }}>
+                <table className='table' style={{ width:900 }}>
                     <thead>
                         <tr>
                             <th scope='col'>Id</th>
                             <th scope='col'>Name</th>
                             <th scope='col'>Email</th>
+                            <th></th>
                             <th scope='col' className='text-right'>Actions</th>
                             <th></th>
                         </tr>
@@ -169,13 +181,14 @@ const RestaurantDisplay = () => {
                                     ) : (
                                         <Restaurant
                                             restaurant={restaurant}
+                                            handleDisplayClick={handleDisplayClick}
                                             handleEditClick={handleEditClick}
                                             deleteRestaurant={deleteRestaurant}
                                             key={restaurant.id}
                                         />
                                     )}
                                 </Fragment>
-                            ))};
+                            ))}
                         </tbody>
                     )}
                 </table>
@@ -207,9 +220,8 @@ const RestaurantDisplay = () => {
                 />
                 <button type='submit' onClick={saveRestaurant}>Save</button>
             </form>
-            <h2>Food Items</h2>
-            <div><ItemDisplay /></div>
-        </>
+            </Container>
+        </div>
     )
 }
 

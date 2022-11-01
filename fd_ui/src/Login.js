@@ -41,9 +41,9 @@ const Login = () => {
   }
 
   return (
-    <div className='centered-div'>
-    <Container className="d-grid h-100">
-      <Form className="text-center w-25">
+    <div>
+    <Container className='align-items-center align-content-center p-5 w-50'>
+      <Form className="text-center">
         <h1 className="mb-3 fs-3 fw-normal">Login</h1>
         <Form.Group className="mb-1"
           controlId="userName">
