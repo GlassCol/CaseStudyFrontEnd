@@ -54,7 +54,7 @@ const Login = () => {
         </Form.Group>
         <Form.Group className="mb-1"
           controlId="password">
-          <Form.Control type="text" placeholder="password" name='password' required="true" value={user.password} className="position-relative"
+          <Form.Control type="password" placeholder="password" name='password' required="true" value={user.password} className="position-relative"
             isInvalid={!!errors.name}
             onChange={(e) => handleChange(e)} />
           <Form.Control.Feedback type='invalid'>{errors.password}</Form.Control.Feedback>
