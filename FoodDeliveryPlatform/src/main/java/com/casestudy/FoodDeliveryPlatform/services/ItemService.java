@@ -16,4 +16,6 @@ public interface ItemService {
     boolean deleteItemById(Long id);
 
     List<Item> getAllRestItems(Long restId);
+
+    Long getLatestId();
 }

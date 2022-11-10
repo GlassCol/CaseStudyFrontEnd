@@ -20,6 +20,7 @@ public class ItemServiceImpl implements ItemService{
         ItemEntity itemEntity = new ItemEntity();
         BeanUtils.copyProperties(item, itemEntity);
         itemRepository.save(itemEntity);
+        item = itemRepository.findLastAddition();
         return item;
     }
 
@@ -44,8 +45,8 @@ public class ItemServiceImpl implements ItemService{
     public Item updateItem(Long id, Item item) {
         ItemEntity itemEntity = itemRepository.findById(id).get();
         itemEntity.setName(item.getName());
-        itemEntity.setRestId(itemEntity.getRestId());
-        itemEntity.setPrice(itemEntity.getPrice());
+        itemEntity.setRestId(item.getRestId());
+        itemEntity.setPrice(item.getPrice());
         itemRepository.save(itemEntity);
         return item;
     }
@@ -62,10 +63,16 @@ public class ItemServiceImpl implements ItemService{
         List<ItemEntity> itemEntities = itemRepository.findAll();
         List<Item> items = itemEntities.stream()
                 .map(item -> new Item(item.getId(), item.getRestId(), item.getName(), item.getPrice()))
+                .filter(item -> item.getRestId() == restId)
                 .collect(Collectors.toList());
-        for (Item item : items) {
-            if(item.getRestId() != restId)items.remove(item);
-        }
         return items;
+    }
+
+    /**
+     * Gets the latest Id for testing Purpose
+     * @return Long: the latest Id
+     */
+    public Long getLatestId(){
+        return itemRepository.findLastAddition().getId();
     }
 }

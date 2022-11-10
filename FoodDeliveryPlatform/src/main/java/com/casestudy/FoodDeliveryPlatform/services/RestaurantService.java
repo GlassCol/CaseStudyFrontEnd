@@ -14,4 +14,6 @@ public interface RestaurantService {
     Restaurant updateRestaurant(Long id, Restaurant restaurant);
 
     boolean deleteRestaurantById(Long id);
+
+    Long getLatestId();
 }

@@ -44,8 +44,8 @@ public class RestaurantServiceImpl implements RestaurantService{
     public Restaurant updateRestaurant(Long id, Restaurant restaurant) {
         RestaurantEntity restaurantEntity = restaurantRepository.findById(id).get();
         restaurantEntity.setName(restaurant.getName());
-        restaurantEntity.setEmailId(restaurantEntity.getEmailId());
-        restaurantEntity.setLicense(restaurantEntity.getLicense());
+        restaurantEntity.setEmailId(restaurant.getEmailId());
+        restaurantEntity.setLicense(restaurant.getLicense());
         restaurantRepository.save(restaurantEntity);
         return restaurant;
     }
@@ -56,4 +56,11 @@ public class RestaurantServiceImpl implements RestaurantService{
         restaurantRepository.delete(restaurant);
         return true;
     }
+
+    @Override
+    public Long getLatestId() {
+        return restaurantRepository.findLastAddition().getId();
+    }
+
+
 }
