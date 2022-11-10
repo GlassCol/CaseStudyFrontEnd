@@ -4,7 +4,7 @@ import EditItemRow from './EditItemRow';
 import Item from './Item';
 import Container from 'react-bootstrap/Container';
 
-const ItemDisplay = () => {
+const ItemDisplay = ({ id }) => {
 
     const [items, setItems] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -40,7 +40,7 @@ const ItemDisplay = () => {
     const fetchData = async () => {
         setLoading(true);
         try {
-            const response = await ItemService.getItems();
+            const response = await ItemService.getRestItems(id);
             setItems(response.data);
         } catch (error) {
             console.log(error)

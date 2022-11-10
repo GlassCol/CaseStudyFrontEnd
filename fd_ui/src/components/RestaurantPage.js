@@ -1,13 +1,14 @@
 import React from 'react'
 import Header from './Header'
 import ItemDisplay from './ItemDisplay'
-import {useLocation} from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
-function RestaurantPage() {
+const RestaurantPage = () => {
+  const { id } = useParams();
   return (
     <>
     <Header />
-    <ItemDisplay />
+    <ItemDisplay id={id}/>
     </>
   )
 }
