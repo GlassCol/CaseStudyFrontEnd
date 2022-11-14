@@ -15,7 +15,7 @@ const ItemDisplay = ({ id }) => {
         restId: "",
         price: ""
     })
-    
+
     const handleChange = (e) => {
         const value = e.target.value;
         setItem({ ...item, [e.target.name]: value });
@@ -23,12 +23,15 @@ const ItemDisplay = ({ id }) => {
 
     const saveItem = (e) => {
         e.preventDefault();
-        ItemService.saveItem(item).then((response) => {
-            console.log(response)
-            fetchData();
-        }).catch((error) => {
-            console.log(error)
-        })
+        if (validate()) {
+            item.restId = id;
+            ItemService.saveItem(item).then((response) => {
+                console.log(response)
+                fetchData();
+            }).catch((error) => {
+                console.log(error)
+            })
+        }
     }
     const [editFormData, setEditFormData] = useState({
         id: item.id,
@@ -75,13 +78,29 @@ const ItemDisplay = ({ id }) => {
 
     const handleEditFormSubmit = (e) => {
         e.preventDefault();
-        fetchItem();
-        ItemService.updateItem(item.id, item).then((response) => {
-            console.log(response)
-        }).catch((error) => {
-            console.log(error)
-        })
+        if (validate) {
+            fetchItem();
+            ItemService.updateItem(item.id, item).then((response) => {
+                console.log(response)
+            }).catch((error) => {
+                console.log(error)
+            })
+        }
         fetchData()
+    }
+
+    const validate = () => {
+        if (item.name === '') {
+            alert("Name cannot be blank");
+            return false;
+        }
+
+        //price
+        if (item.price === "") {
+            alert("Price cannot be blank");
+            return false;
+        }
+        return true;
     }
 
     const handleEditClick = (e, item) => {
@@ -154,26 +173,18 @@ const ItemDisplay = ({ id }) => {
                 <input
                     type='text'
                     name="name"
-                    required="required"
                     placeholder='Item Name'
                     value={item.name}
                     onChange={(e) => handleChange(e)}
-                />
-                <input
-                    type='number'
-                    name="restId"
-                    required="required"
-                    placeholder='Enter A Restaurant Id'
-                    value={item.restId}
-                    onChange={(e) => handleChange(e)}
+                    required
                 />
                 <input
                     type='number'
                     name="price"
-                    required="required"
                     placeholder='Enter Price'
                     value={item.price}
                     onChange={(e) => handleChange(e)}
+                    required
                 />
                 <button type='submit' onClick={saveItem}>Save</button>
             </form>
