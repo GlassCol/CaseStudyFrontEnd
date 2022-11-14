@@ -4,7 +4,6 @@ import Restaurant from './Restaurant';
 import '../css/Home.css';
 import Container from 'react-bootstrap/Container';
 import EditRestaurantRow from './EditRestaurantRow';
-import {omit} from 'lodash';
 import { useNavigate, } from 'react-router-dom';
 
 const RestaurantDisplay = () => {
@@ -29,17 +28,18 @@ const RestaurantDisplay = () => {
         e.preventDefault();
         console.log(displayRestaurant)
         navigate('/RestaurantPage/' + displayRestaurant.id);
-        
+
     }
     const saveRestaurant = (e) => {
         e.preventDefault();
-        validate(e, restaurant.name, restaurant.emailId, restaurant.license);
-        RestaurantService.saveRestaurant(restaurant).then((response) => {
-            console.log(response)
-            fetchData();
-        }).catch((error) => {
-            console.log(error)
-        })
+        if (validate()) {
+            RestaurantService.saveRestaurant(restaurant).then((response) => {
+                console.log(response)
+                fetchData();
+            }).catch((error) => {
+                console.log(error)
+            })
+        }
     }
     const fetchData = async () => {
         setLoading(true);
@@ -123,103 +123,103 @@ const RestaurantDisplay = () => {
         });
     };
 
-    const [errors, setErrors] = useState({});
-
-    const validate = (e, name, email, license) => {
-        switch (name) {
-            case 'restaurantName':
-                if (name.length <= 0) {
-
-                    setErrors({
-                        ...errors,
-                        restaurantName:'Name must not be empty'
-                    })
-                } else {
-
-
-                    let newObj = omit(errors, "restaurantName");
-                    setErrors(newObj);
-                    
-                }
-                break;
-
-            default:
-                break;
+    const validate = () => {
+        if (restaurant.name === "") {
+            alert("Name cannot be blank")
+            return false;
         }
+
+        if (restaurant.emailId === "") {
+            alert("Email cannot be blank")
+            return false;
+        }
+        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(restaurant.emailId)) {
+            alert("Not a valid email")
+            return false;
+        }
+        if (restaurant.license === "") {
+            alert("License cannot be empty")
+            return false;
+        }
+        if (restaurant.license.split('.').pop() !== "pdf" && restaurant.license.split('.').pop() !== "docx") {
+            alert("License must be pdf of docx file")
+            return false;
+        }
+        return true;
     }
 
     return (
         <div>
             <Container className='align-items-center align-content-center p-5 w-75'>
-            <Container className='align-items-center align-content-center p-5 w-50'>
-            <h1>Restaurants</h1>
-            </Container>
-            <form>
-                <table className='table' style={{ width:900 }}>
-                    <thead>
-                        <tr>
-                            <th scope='col'>Id</th>
-                            <th scope='col'>Name</th>
-                            <th scope='col'>Email</th>
-                            <th></th>
-                            <th scope='col' className='text-right'>Actions</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    {!loading && (
-                        <tbody key={"tbody"}>
-                            {restaurants.map((restaurant) => (
-                                <Fragment key={"Fragment" + restaurant.id}>
-                                    {editRestaurantId === restaurant.id ? (
-                                        <EditRestaurantRow
-                                            editFormData={editFormData}
-                                            handleEditFormSubmit={handleEditFormSubmit}
-                                            handleEditFormChange={handleEditFormChange}
-                                            handleEditFormCancel={handleEditFormCancel}
-                                            key={restaurant.id}
-                                        />
-                                    ) : (
-                                        <Restaurant
-                                            restaurant={restaurant}
-                                            handleDisplayClick={handleDisplayClick}
-                                            handleEditClick={handleEditClick}
-                                            deleteRestaurant={deleteRestaurant}
-                                            key={restaurant.id}
-                                        />
-                                    )}
-                                </Fragment>
-                            ))}
-                        </tbody>
-                    )}
-                </table>
-            </form>
-            <form>
-                <input
-                    type='text'
-                    name="name"
-                    required="required"
-                    placeholder='Restaurant Name'
-                    value={restaurant.name}
-                    onChange={(e) => handleChange(e)}
-                />
-                <input
-                    type='email'
-                    name="emailId"
-                    required="required"
-                    placeholder='Enter Email'
-                    value={restaurant.emailId}
-                    onChange={(e) => handleChange(e)}
-                />
-                <input
-                    type='file'
-                    name="license"
-                    required="required"
-                    placeholder='Upload Safety License'
-                    value={restaurant.license}
-                    onChange={(e) => handleChange(e)}
-                />
-                <button type='submit' onClick={saveRestaurant}>Save</button>
-            </form>
+                <Container className='align-items-center align-content-center p-5 w-50'>
+                    <h1>Restaurants</h1>
+                </Container>
+                <form>
+                    <table className='table' style={{ width: 900 }}>
+                        <thead>
+                            <tr>
+                                <th scope='col'>Id</th>
+                                <th scope='col'>Name</th>
+                                <th scope='col'>Email</th>
+                                <th></th>
+                                <th scope='col' className='text-right'>Actions</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        {!loading && (
+                            <tbody key={"tbody"}>
+                                {restaurants.map((restaurant) => (
+                                    <Fragment key={"Fragment" + restaurant.id}>
+                                        {editRestaurantId === restaurant.id ? (
+                                            <EditRestaurantRow
+                                                editFormData={editFormData}
+                                                handleEditFormSubmit={handleEditFormSubmit}
+                                                handleEditFormChange={handleEditFormChange}
+                                                handleEditFormCancel={handleEditFormCancel}
+                                                key={restaurant.id}
+                                            />
+                                        ) : (
+                                            <Restaurant
+                                                restaurant={restaurant}
+                                                handleDisplayClick={handleDisplayClick}
+                                                handleEditClick={handleEditClick}
+                                                deleteRestaurant={deleteRestaurant}
+                                                key={restaurant.id}
+                                            />
+                                        )}
+                                    </Fragment>
+                                ))}
+                            </tbody>
+                        )}
+                    </table>
+                </form>
+                <form>
+                    <input
+                        type='text'
+                        name="name"
+                        required="required"
+                        placeholder='Restaurant Name'
+                        value={restaurant.name}
+                        onChange={(e) => handleChange(e)}
+                    />
+                    <input
+                        type='email'
+                        name="emailId"
+                        required="required"
+                        placeholder='Enter Email'
+                        value={restaurant.emailId}
+                        onChange={(e) => handleChange(e)}
+                    />
+                    <input
+                        type='file'
+                        name="license"
+                        required="required"
+                        placeholder='Upload Safety License'
+                        value={restaurant.license}
+                        onChange={(e) => handleChange(e)}
+                    />
+                    <button type='submit' onClick={saveRestaurant}>Save</button>
+                </form>
             </Container>
         </div>
     )
