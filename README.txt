@@ -18,4 +18,4 @@ username and password for your database
 
 # Status
 
-This project is still being developed and should be done shortly
+Completed
